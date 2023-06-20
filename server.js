@@ -16,7 +16,22 @@ const opinions = {
 app.use("/peerjs", ExpressPeerServer(server, opinions));
 app.use(express.static("public"));
 
+app.get("/data", (req, res) => {
+	// Step 1: Create or retrieve the response object
+	const response = {
+		message: "Hello, World!",
+		data: {},
+	};
+
+	// Step 2: Add data to the response object
+	response.data.room = uuidv4();
+
+	// Step 3: Send the modified response object back to the client
+	res.json(response);
+});
+
 app.get("/", (req, res) => {
+	// res.json("room", { roomId: req.params.room });
 	res.redirect(`/${uuidv4()}`);
 });
 
