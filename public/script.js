@@ -18,13 +18,15 @@ showChat.addEventListener("click", () => {
 	document.querySelector(".main__left").style.display = "none";
 	document.querySelector(".header__back").style.display = "block";
 });
+let local = 1;
 
-const user = prompt("Enter your name");
+const user = "incognito" + local;
+
+local++;
 //127.0.0.1:3030
-//164.92.168.255
 var peer = new Peer({
 	config: {
-		host: "127.0.0.1:3030",
+		host: "164.92.168.255",
 		port: 3030,
 		path: "/peerjs",
 		iceServers: [
@@ -121,6 +123,8 @@ text.addEventListener("keydown", (e) => {
 const inviteButton = document.querySelector("#inviteButton");
 const muteButton = document.querySelector("#muteButton");
 const stopVideo = document.querySelector("#stopVideo");
+const endSession = document.querySelector("#endSession");
+
 muteButton.addEventListener("click", () => {
 	const enabled = myVideoStream.getAudioTracks()[0].enabled;
 	if (enabled) {
@@ -156,6 +160,11 @@ inviteButton.addEventListener("click", (e) => {
 		"Copy this link and send it to people you want to meet with",
 		window.location.href
 	);
+});
+
+endSession.addEventListener("click", (e) => {
+	prompt("Goodbye", referringUrl);
+	window.location.href = "http://localhost:3000/conference/" + referringUrl;
 });
 
 socket.on("createMessage", (message, userName) => {
