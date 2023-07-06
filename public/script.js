@@ -26,7 +26,8 @@ local++;
 //127.0.0.1:3030
 var peer = new Peer({
 	config: {
-		host: "164.92.168.255",
+		// host: "164.92.168.255",
+		host: "127.0.0.1:3030",
 		port: 3030,
 		path: "/peerjs",
 		iceServers: [
@@ -163,8 +164,8 @@ inviteButton.addEventListener("click", (e) => {
 });
 
 endSession.addEventListener("click", (e) => {
-	prompt("Goodbye", referringUrl);
-	window.location.href = "http://localhost:3000/conference/" + referringUrl;
+	confirm("Goodbye");
+	window.location.href = "http://dev.zoomcare.kz/conference/" + referringUrl;
 });
 
 socket.on("createMessage", (message, userName) => {
